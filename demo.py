@@ -22,6 +22,7 @@ mario.rect = mario.image.get_rect()
 # 坐标改到屏幕中心
 mario.rect.x, mario.rect.y = w/2, h/2
 
+# 玩家组
 player_group = pygame.sprite.Group()
 player_group.add(mario)
 
@@ -41,6 +42,7 @@ while True:
             if keys[pygame.K_RIGHT]:
                 mario.rect.x += 10
 
+    #画图, 用blit方法, 将背景图贴上
     screen.blit(bgpic, (0, 0))
     player_group.draw(screen)
     pygame.display.update()
