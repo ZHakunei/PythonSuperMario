@@ -10,7 +10,7 @@ class Game:
         self.screen = pygame.display.get_surface()
         self.clock = pygame.time.Clock()
 
-    def run(self,GRAPHICS):
+    def run(self, state):
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -19,11 +19,13 @@ class Game:
                     self.keys = pygame.key.get_pressed()
                 elif event.type == pygame.KEYUP:
                     self.keys = pygame.key.getpressed()
-            self.screen.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
-            image = get_image(GRAPHICS['mario_bros'], 145, 32, 16, 16, (0, 0, 0), random.randint(5,15))
-            self.screen.blit(image, (300, 300))
+            #self.screen.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+            #image = get_image(GRAPHICS['mario_bros'], 145, 32, 16, 16, (0, 0, 0), random.randint(5,15))
+            #self.screen.blit(image, (300, 300))
+            state.update(self.screen)
             pygame.display.update()
-            self.clock.tick(1)
+            self.clock.tick(20)
+
 
 # 载入图片
 
@@ -46,6 +48,7 @@ def load_graphics(path, accept=('.jpg', '.png', '.bmp', '.gif')):
             graphics[name] = img
     return graphics
 
+
 # colorkey是选中底色快速抠图
 
 
@@ -53,5 +56,6 @@ def get_image(sheet, x, y, width, height, colorkey, scale):
     image = pygame.Surface((width, height))
     image.blit(sheet, (0, 0), (x, y, width, height))
     image.set_colorkey(colorkey)
-    image = pygame.transform.scale(image, (int(width*scale), int(height*scale)))
+    image = pygame.transform.scale(image,
+                                   (int(width * scale), int(height * scale)))
     return image
