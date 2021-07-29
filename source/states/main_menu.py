@@ -1,4 +1,3 @@
-from os import setgroups
 import pygame
 from .. import setup, tools
 from .. import constants as C
