@@ -3,3 +3,5 @@ SCREEN_SIZE = (SCREEN_W, SCREEN_H)
 
 BG_MULTI = 2.68
 PLAYER_MULTI = 2.9
+
+FONT = 'fixedsys.ttf'

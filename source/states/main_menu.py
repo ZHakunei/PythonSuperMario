@@ -1,16 +1,19 @@
 import pygame
 from .. import setup, tools
 from .. import constants as C
+from ..components import info
 
 
 class MainMenu:
     def __init__(self):
-        #设置底图
+        # 设置底图
         self.setup_background()
-        #设置玩家
+        # 设置玩家
         self.setup_player()
-        #设置光标
+        # 设置光标 也就是小蘑菇
         self.setup_cursor()
+
+        self.info = info.Info('main_menu')
 
     def setup_background(self):
         self.background = setup.GRAPHICS['level_1']
@@ -34,10 +37,13 @@ class MainMenu:
                                             C.PLAYER_MULTI)
 
     def update(self, surface):
-        #import random
-        #surface.fill((random.randint(0, 255), random.randint(0, 255),
-        #random.randint(0, 255)))
+        # 处理游戏运行时帧与帧的更新
+        # surface.fill((random.randint(0, 255), random.randint(0, 255),
+        # random.randint(0, 255)))
         surface.blit(self.background, self.viewport)
         surface.blit(self.caption, (170, 100))
         surface.blit(self.player_image, (110, 490))
         surface.blit(self.cursor_image, (220, 360))
+
+        self.info.update()
+        self.info.draw(surface)
