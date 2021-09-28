@@ -23,8 +23,8 @@ class MainMenu:
                               int(self.background_rect.height * C.BG_MULTI)))
         self.viewport = setup.SCREEN.get_rect()
 
-        self.caption = tools.get_image(setup.GRAPHICS['title_screen'], 1, 60,
-                                       176, 88, (255, 0, 220), C.BG_MULTI)
+        self.caption = tools.get_image(setup.GRAPHICS['title_screen'], 0, 59,
+                                       177, 89, (255, 0, 220), C.BG_MULTI)
 
     def setup_player(self):
         self.player_image = tools.get_image(setup.GRAPHICS['mario_bros'], 178,

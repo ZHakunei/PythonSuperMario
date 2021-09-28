@@ -3,6 +3,8 @@ from source.constants import FONT
 import pygame
 from pygame import font
 from .. import constants as C
+from . import coin
+
 pygame.font.init()
 
 
@@ -11,8 +13,9 @@ class Info:
         self.state = state
         self.create_state_labels()
         self.create_info_labels()
+        self.flash_coin = coin.FlashingCoin()
 
-# 创建阶段特有文字
+    # 创建阶段特有文字
     def create_state_labels(self):
         self.state_labels = []
         if self.state == 'main_menu':
@@ -45,15 +48,16 @@ class Info:
         label_image = font.render(label, 1, (255, 255, 255))
         rect = label_image.get_rect()
         label_image = pygame.transform.scale(
-            label_image, (int(rect.width*width_scale), int(rect.height*height_scale)))
+            label_image, (int(rect.width * width_scale), int(rect.height * height_scale)))
 
         return label_image
 
     def update(self):
-        pass
+        self.flash_coin.update()
 
     def draw(self, surface):
         for label in self.state_labels:
             surface.blit(label[0], label[1])
         for label in self.info_labels:
             surface.blit(label[0], label[1])
+        surface.blit(self.flash_coin.image,self.flash_coin.rect)
