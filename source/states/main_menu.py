@@ -32,18 +32,37 @@ class MainMenu:
                                             C.PLAYER_MULTI)
 
     def setup_cursor(self):
-        self.cursor_image = tools.get_image(setup.GRAPHICS['item_objects'], 24,
+        self.cursor = pygame.sprite.Sprite()
+        self.cursor.image = tools.get_image(setup.GRAPHICS['item_objects'], 24,
                                             160, 8, 8, (0, 0, 0),
                                             C.PLAYER_MULTI)
+        rect = self.cursor.image.get_rect()
+        rect.x, rect.y = (220, 360)
+        self.cursor.rect = rect
+        self.cursor.state = '1P'
 
-    def update(self, surface):
+    def update_cursor(self, keys):
+        if keys[pygame.K_UP]:
+            self.cursor.state = '1P'
+            self.cursor.rect.y = 360
+        elif keys[pygame.K_DOWN]:
+            self.cursor.state = '2P'
+            self.cursor.rect.y = 405
+        elif keys[pygame.K_RETURN]:
+            if self.cursor.state == '1P':
+                pass
+            elif self.cursor.state == '2P':
+                pass
+
+    def update(self, surface, keys):
         # 处理游戏运行时帧与帧的更新
         # surface.fill((random.randint(0, 255), random.randint(0, 255),
         # random.randint(0, 255)))
         surface.blit(self.background, self.viewport)
         surface.blit(self.caption, (170, 100))
         surface.blit(self.player_image, (110, 490))
-        surface.blit(self.cursor_image, (220, 360))
+        self.update_cursor(keys)
+        surface.blit(self.cursor.image, self.cursor.rect)
 
         self.info.update()
         self.info.draw(surface)
