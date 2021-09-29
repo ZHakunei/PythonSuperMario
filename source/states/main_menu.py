@@ -12,8 +12,9 @@ class MainMenu:
         self.setup_player()
         # 设置光标 也就是小蘑菇
         self.setup_cursor()
-
         self.info = info.Info('main_menu')
+        self.finished = False
+        self.next = 'load_screen'
 
     def setup_background(self):
         self.background = setup.GRAPHICS['level_1']
@@ -50,9 +51,9 @@ class MainMenu:
             self.cursor.rect.y = 405
         elif keys[pygame.K_RETURN]:
             if self.cursor.state == '1P':
-                pass
+                self.finished = True
             elif self.cursor.state == '2P':
-                pass
+                self.finished = True
 
     def update(self, surface, keys):
         # 处理游戏运行时帧与帧的更新

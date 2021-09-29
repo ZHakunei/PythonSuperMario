@@ -6,10 +6,19 @@ from pygame import image
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, state_dict, start_state):
         self.screen = pygame.display.get_surface()
         self.clock = pygame.time.Clock()
         self.keys = pygame.key.get_pressed()
+        self.state_dict = state_dict
+        self.state = self.state_dict[start_state]
+
+    def update(self):
+        if self.state.finished:
+            next_state = self.state.next
+            self.state.finished = False
+            self.state = self.state_dict[next_state]
+        self.state.update(self.screen, self.keys)  # state的update方法由MainMenu类定义
 
     def run(self, state):
         while True:
@@ -23,8 +32,7 @@ class Game:
             # self.screen.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
             # image = get_image(GRAPHICS['mario_bros'], 145, 32, 16, 16, (0, 0, 0), random.randint(5,15))
             # self.screen.blit(image, (300, 300))
-            state.update(self.screen, self.keys)
-            #state的update方法由MainMenu类定义
+            self.update()
             pygame.display.update()
             self.clock.tick(20)
 
