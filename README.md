@@ -39,7 +39,7 @@ Source
 > pygame.display.set_mode(C.SCREEN_W, C.SCREEN_H)
 
 放在setup文件中, 他是怎么执行到的呢?
-
+->import 那个文件 就直接执行了
 GRAPHICS?
 
 VScode如何设置在任何界面下运行都是从main.py开始运行?
