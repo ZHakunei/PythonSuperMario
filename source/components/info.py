@@ -1,3 +1,8 @@
+#   -*- coding:utf-8 -*-
+#   @Time   :   2021/9/30 17:18
+#   @Author :   ZHakunei
+#   @Email  :   zhang_boning@outlook.com
+
 # 游戏文字信息
 from source.constants import FONT
 import pygame
